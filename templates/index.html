@@ -1,0 +1,211 @@
+{%extends 'base.html'%}
+
+{% block title %}Payroll Prediction{% endblock %}
+
+{% block content%}
+
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h2>Predict the Average yearly Salary of a MLB team</h2>
+    <form action="/form", method="POST">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Percentage of wins <br />(0-100%)</label>
+          <br>
+        <input type="number" class="col-xs-2" id="exampleFormControlInput1" name="wins" value="0" placeholder="       0 - 100 %">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">League</label>
+
+        <select class="col-xs-2" id="exampleFormControlSelect1" name="league">
+          <option value="AL">AL</option>
+          <option value="ML">NL</option>
+
+        </select>
+        <br>
+
+          <button type="submit" value="Submit" class="btn btn-info btn-lg">Predict</button>
+
+
+  <br>
+      </div>
+    </form>
+
+
+
+    <h3>{{Text}}</h3>
+    <br>
+    <h3>{{bound}}</h3>
+    <br>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container" style="margin-top:40px" >
+    <div class="row">
+      <div class="col-lg-4 mx-auto">
+
+        <img src="https://miro.medium.com/max/2800/0*Su_7B7tHrYIZ-zcZ.jpg" class="img-circle" alt="Cinque Terre" style="max-width:120%;
+max-height:120%">
+
+      </div>
+      <div class="col-lg-4 mx-auto">
+        <h2>About this Project</h2>
+        <p class="lead">In this project, I predicted the average amount of salary a MLB team needs to have to
+        gain certain amount of success. This project also helps to understand the correlation between the average salary, league and
+     win percentage . For this project, I have accessed some raw data on relating teams, salary, league , wins and losses in a season.
+      The source of the raw data is attached in the end of
+    the page. The prediction process includes data cleaning, visualization, evaluation, correlation and finally regression.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="detail" class="bg-light">
+  <div class="container" >
+    <div class="row" style="margin-bottom:40px">
+      <div class="col-lg-8 mx-auto">
+        <h2>High level Overview</h2>
+        <p class="lead">
+          As a part of the project, I have created various checklist that needs to be fulfilled before deployment of the model.
+           The checklist includes:
+        </p>
+        <ul class="list-group">
+
+          <li class="list-group-item ">Formulate Question</li>
+           <li class="list-group-item">Gather and Clean data</li>
+           <li class="list-group-item">Explore and Visualize</li>
+           <li class="list-group-item">Train Alogrithm</li>
+           <li class="list-group-item">Deploy and Evaluate</li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="algorithm">
+  <div class="container" style="margin-top:40px">
+    <div class="row">
+      <div class="col-lg-4 mx-auto">
+        <h2>Formulate Question</h2>
+        <p class="lead"> Before starting this project, I created various question that should be answered before deployment of this project and these
+          question helps in determining the success of this project. The questions are:</p>
+        <ul class="list-group">
+
+          <li class="list-group-item ">1) Does Baseball Salary have a positive correlation with the amount of their success and League they play in?</li>
+
+           <li class="list-group-item">2) Can the salary be predicted if we want certian amount or percent of wins?</li>
+           <li class="list-group-item">3) What is the R-squared value of the regression and how good will the model be?</li>
+            <li class="list-group-item">4) Is the Salary normally distributed?</li>
+
+
+        </ul>
+
+      </div>
+      <div class="col-lg-4 mx-auto">
+        <h2>Gather and Clean Data</h2>
+        <p class="lead"> I collected the data from surepayrool website. The full link for my source is provided at the end of the page. The data had 30
+        rows and the sample of top 5 rows can be seen in the picture below </p>
+        <img src="static/images/rewdata.PNG" />
+      <p class="lead"> Data cleaning is a important part of data prediction. In this process, I
+      removed the Team Abbreviation and converted the Wins and Loss columns to a single win percent column.  </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="container  bg-light" style="margin-top:40px" >
+  <div class="row">
+    <div class="col-lg-4 mx-auto">
+      <h2>Explore and Visualize</h2>
+      <p class="lead">Data Visualization is an important step to analize the data and understand them. In this
+      phase, I used histogram and pdf model to understand the distribution of the salary.Through the histogram model
+    we can see that the salary is not normally distributed. Most of the salary is distributed in the left of the mean.
+    For the pdf model I used seaborn library in python as it helps in better visualization of data. I converted the salary data
+    into a log value. This helps to decrease the variability of the data.
+   The skew score of the model was 0.71, which proves the distrubtion to be positivley-skewed or Right-skewed. Right Skew
+   has a long tail in the positive directon of the number line and the mean is in usually in the right side of Mode and
+   Median.<br>
+    <b>Figure 3</b> shows the regression model
+to help us find the relationship between Average salary and win percentage. I have
+made use of scattter plot in determining the strength of the relationship between our two variables.
+ Likewise, R squared helps us to find the goodness of fit of a model. An R squared 1 means the regression model
+ perfectly fit the data. We have a R squared value of 0.38 which is normal as most of the real data have R squared value between
+.30-.50</p>
+
+    </div>
+
+    <div class="col-lg-4 mx-auto">
+      <img src="static/images/histogram_model.png"  align="middle" style="max-width:100%;
+max-height:100%" />
+
+      <h5>Fig 1: Distribution of Salary</h5>
+      <img src="static/images/skew.png"  align="middle" style="max-width:100%;
+max-height:100%" />
+        <h5>Fig 2: PDF distribution </h5>
+        <img src="static/images/regression_model.png"  align="middle" style="max-width:100%;
+  max-height:100%" />
+            <h5>Fig 3: Regression model </h5>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="container  " style="margin-top:40px" >
+  <div class="row">
+    <div class="col-lg-4 mx-auto">
+      <img src="static/images/correlation.png"  align="middle" style="max-width:100%;
+max-height:100%" />
+      <h5>Fig 1: Correlation between winning %, Salary and Leauge</h5>
+
+    </div>
+    <div class="col-lg-4 mx-auto">
+      <h2>Correlation</h2>
+
+      <p class="lead"> Correlation is a degree through which a data move together. We can take example of relationship
+      between weather and ice cream. The more hot the weather is the more ice cream we like to eat. This creates a postive correlation
+    between heat and ice cream. Talking about our project, I have created a correlation chart using heatmap. It shows correlation
+    between Average salary, league and the winning percent.
+   </p>
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+  <div class="container bg-light " >
+    <div class="row" style="margin-bottom:40px; margin-top:40px;">
+      <div class="col-lg-8 mx-auto">
+        <h2>Train Algorithm with Multivariate Regression</h2>
+        <p class="lead">
+        Multivariate Regression is the way of estimating a single regression model with more than one outcome variable.
+        Through the correlation heat map, we can understand that both winning percent and league has a good correlation
+        with the average salary. This made me use both league and winning percent as dependent variable to calculate average salary.
+        As a result, I created a predictor function which takes in winning percent and league data and pass it in my regression model.
+        The regression model prints the estimated average yearly salary or payroll a team should meet to have a good chance of winning certain amount of games in a MLB season.
+         With the use of mean squared error, I was able to find the upperbound and lowerbound
+        of the Average salary with 95% confidence level.
+
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+{% endblock%}
